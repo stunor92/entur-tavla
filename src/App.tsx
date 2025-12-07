@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Weather from './components/Weather';
 import type { YrWeather } from './types/YrWeather';
 import { LocationContext } from './ts/stores';
@@ -112,8 +112,16 @@ export default function App() {
     };
   }, []);
 
+  const contextValue = useMemo(
+    () => ({
+      locationName: location.name,
+      setLocationName: (name: string) => setLocation({ ...location, name })
+    }),
+    [location]
+  );
+
   return (
-    <LocationContext.Provider value={{ locationName: location.name, setLocationName: (name) => setLocation({ ...location, name }) }}>
+    <LocationContext.Provider value={contextValue}>
       <div className="centered-container" style={{ paddingTop: '5vh' }}>
         <img src="bergentur.png" alt="" width="50%" />
       </div>
