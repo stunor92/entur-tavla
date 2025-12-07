@@ -124,6 +124,9 @@ export const weatherSymbolKeys = {
   heavysnow: '50',
 } as const;
 
+export type TWeatherSymbolKey = keyof typeof weatherSymbolKeys;
+export type TWeatherSymbolId = typeof weatherSymbolKeys[TWeatherSymbolKey];
+
 export function convertSymbolKeyToId(key: TWeatherSymbolKey): TWeatherSymbolId | undefined {
   return weatherSymbolKeys[key] ?? undefined;
 }
