@@ -1,7 +1,14 @@
 # Tavla
-This is just a simmple Github Page project to host a single web-page that shows a combination of [Entur tavla](https://tavla.entur.no) and [Yr widget](https://developer.yr.no/doc/guides/available-widgets/).
-Thhe purpose of the project is just to have a screen at our office to show busses and trams and a weather-forecast so we can plan when its the best time to leave office.
+This is just a simple Github Page project to host a single web-page that shows a combination of [Entur tavla](https://tavla.entur.no) and [Yr widget](https://developer.yr.no/doc/guides/available-widgets/).
+The purpose of the project is just to have a screen at our office to show busses and trams and a weather-forecast so we can plan when its the best time to leave office.
 
+## Tech Stack
+
+This project is built with:
+- **React** - UI framework
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **Tailwind CSS** - Styling
 
 ## Developing
 
@@ -23,5 +30,3 @@ npm run build
 ```
 
 You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
