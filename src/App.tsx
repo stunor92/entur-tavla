@@ -122,12 +122,12 @@ export default function App() {
 
   return (
     <LocationContext.Provider value={contextValue}>
-      <div className="centered-container" style={{ paddingTop: '5vh' }}>
-        <img src="bergentur.png" alt="" width="50%" />
+      <div className="centered-container">
+        <img src="header.png" alt="" width="100%" />
       </div>
 
-      <div className="centered-container" style={{ height: '50vh' }}>
-        <video src="entur.mp4" autoPlay loop muted controls className="video-blur"></video>
+      <div className="centered-container" style={{ width: '100%' }}>
+        <video src="julereise.mp4" autoPlay loop muted controls className="video-blur"></video>
       </div>
 
       <div className="centered-container">
@@ -145,7 +145,9 @@ export default function App() {
         ) : null}
       </div>
       
-      <img src="entur.png" alt="" width="100%" />
+      <div className="left-container" style={{ padding: '5vh' }}>
+        <img src="logo.png" alt="" height="30px" />
+      </div>
     </LocationContext.Provider>
   );
 }
