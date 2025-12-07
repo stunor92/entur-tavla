@@ -30,3 +30,8 @@ npm run build
 ```
 
 You can preview the production build with `npm run preview`.
+
+
+## Online
+
+go to https://stunor92.github.io/entur-tavla/ or https://entur.sturle.dev/
