@@ -1,15 +1,10 @@
-import { formatNumber, convertSymbolKeyToId, type TWeatherSymbolKey } from '../ts/main';
-import type { Timeseries } from '../types/YrWeather';
+import { formatNumber, convertSymbolKeyToId } from '../ts/main';
 
-interface WeatherProps {
-  weather: Timeseries;
-}
-
-export default function Weather({ weather }: WeatherProps) {
+export default function Weather({ weather }) {
   const temperature = weather.data.instant.details.air_temperature;
   const isPositive = temperature > 0;
   const symbolCode = weather.data.next_1_hours.summary.symbol_code;
-  const weatherIconId = convertSymbolKeyToId(symbolCode as TWeatherSymbolKey);
+  const weatherIconId = convertSymbolKeyToId(symbolCode);
 
   return (
     <div className="box">

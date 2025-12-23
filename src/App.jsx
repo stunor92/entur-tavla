@@ -1,25 +1,18 @@
 import { useState, useEffect, useMemo } from 'react';
-import Weather from './components/Weather';
-import type { YrWeather } from './types/YrWeather';
-import { LocationContext } from './ts/stores';
+import Weather from './components/Weather.jsx';
+import { LocationContext } from './ts/stores.js';
 import './css/main.css';
 
-interface Location {
-  name: string;
-  lat: number;
-  lng: number;
-}
-
 export default function App() {
-  const [location, setLocation] = useState<Location>({ 
-    name: 'Bergen', 
-    lat: 60.39299, 
-    lng: 5.32415 
+  const [location, setLocation] = useState({
+    name: 'Bergen',
+    lat: 60.39299,
+    lng: 5.32415
   });
-  const [weatherData, setWeatherData] = useState<YrWeather | null>(null);
+  const [weatherData, setWeatherData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  async function _fetch(url: string): Promise<any> {
+  async function _fetch(url) {
     const result = await fetch(url, {
       method: 'GET',
       headers: {
@@ -34,15 +27,15 @@ export default function App() {
     return result;
   }
 
-  async function getYr(lat: string, lng: string): Promise<YrWeather> {
+  async function getYr(lat, lng) {
     const url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${lat}&lon=${lng}`;
-    const result: Promise<YrWeather> = await _fetch(url);
+    const result = await _fetch(url);
     return result;
   }
 
   // Geolocation functions - commented out as they are not currently used
   // Can be uncommented if location detection is needed in the future
-  
+
   // async function _getNameFromCoordinates(lat: number, lon: number): Promise<NominatimReverse> {
   //   const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
   //   const result: Promise<NominatimReverse> = await _fetch(url);
@@ -115,7 +108,7 @@ export default function App() {
   const contextValue = useMemo(
     () => ({
       locationName: location.name,
-      setLocationName: (name: string) => setLocation({ ...location, name })
+      setLocationName: (name) => setLocation({ ...location, name })
     }),
     [location]
   );
@@ -144,7 +137,7 @@ export default function App() {
           </div>
         ) : null}
       </div>
-      
+
       <img src="entur.png" alt="" width="100%" />
     </LocationContext.Provider>
   );

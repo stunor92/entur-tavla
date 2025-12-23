@@ -1,38 +1,14 @@
 import { isToday } from 'date-fns';
-
 /**
- * If date is today this returns date in natural language,
- * if the date is later than today it returns weekday with the time.
- * 
- * Example:
- * - i dag kl. 12:00
- * - mandag kl. 12:00
- * 
- * @param time Datetime from Yr
- * @returns formatted date
+ * @param {string|number} number
+ * @param {string|undefined} [format]
  */
-export function getFormattedDate(time: string) {
-  const date = new Date(time);
-
-  const formattedDate = new Intl.DateTimeFormat('no', {
-    weekday: 'long',
-    hour: 'numeric',
-    minute: 'numeric'
-  }).format(date);
-
-  if (isToday(date)) {
-    return (formattedDate).replace(`${date.toLocaleString('default', {weekday: 'long'})}`, 'i dag')
-  }
-
-  return formattedDate;
-}
-
-export function formatNumber(number: string | number, format: string | undefined = undefined) {
+export function formatNumber(number, format = undefined) {
   if (format) {
     return new Intl.NumberFormat('no', {
       style: 'unit',
       unit: format,
-      maximumFractionDigits: Number(number) < 1 && format == 'millimeter' ? 1 : 0
+      maximumFractionDigits: Number(number) < 1 && format === 'millimeter' ? 1 : 0
     }).format(Number(number));
   }
   return new Intl.NumberFormat('no', { maximumFractionDigits: 0 }).format(Number(number));
@@ -121,17 +97,23 @@ export const weatherSymbolKeys = {
   lightsleet: '47',
   heavysleet: '48',
   lightsnow: '49',
-  heavysnow: '50',
-} as const;
+  heavysnow: '50'
+};
 
-export type TWeatherSymbolKey = keyof typeof weatherSymbolKeys;
-export type TWeatherSymbolId = typeof weatherSymbolKeys[TWeatherSymbolKey];
-
-export function convertSymbolKeyToId(key: TWeatherSymbolKey): TWeatherSymbolId | undefined {
+/**
+ * Convert symbol key to id.
+ * @param {string} key
+ * @returns {string|undefined}
+ */
+export function convertSymbolKeyToId(key) {
   return weatherSymbolKeys[key] ?? undefined;
 }
 
-export function getWeatherSymbolId(symbol?: { n?: number; var?: 'None' | 'Sun' | 'Moon' | 'PolarNight' }) {
+/**
+ * @param {{ n?: number, var?: 'None' | 'Sun' | 'Moon' | 'PolarNight' } | undefined} [symbol]
+ * @returns {string|undefined}
+ */
+export function getWeatherSymbolId(symbol) {
   if (symbol == null || symbol.n == null) {
     return undefined;
   }
